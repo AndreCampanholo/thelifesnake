@@ -220,7 +220,15 @@ while True:
             sys.exit()
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_q:
+                pygame.quit()
+                sys.exit()
+            elif event.key == pygame.K_p:
+                game_on = not game_on
+            # Ignore movement keys while paused.
+            elif not game_on:
+                continue
+            elif event.key == pygame.K_DOWN:
                 snake.ymov = 1
                 snake.xmov = 0
             elif event.key == pygame.K_UP:
@@ -232,11 +240,6 @@ while True:
             elif event.key == pygame.K_LEFT:
                 snake.ymov = 0
                 snake.xmov = -1
-            elif event.key == pygame.K_q:
-                pygame.quit()
-                sys.exit()
-            elif event.key == pygame.K_p:
-                game_on = not game_on
 
     # While paused, do not advance the snake or redraw the arena.
     # The existing objects are still displayed below.
