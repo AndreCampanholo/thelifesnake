@@ -19,6 +19,7 @@
 
 import random
 import sys
+from pathlib import Path
 
 import pygame
 
@@ -50,12 +51,13 @@ pygame.init()
 clock = pygame.time.Clock()
 arena = pygame.display.set_mode((WIDTH, HEIGHT))
 
-BIG_FONT = pygame.font.Font(
-    "assets/font/GetVoIP-Grotesque.ttf", int(WIDTH / 8)
-)
-SMALL_FONT = pygame.font.Font(
-    "assets/font/GetVoIP-Grotesque.ttf", int(WIDTH / 20)
-)
+# Resolve assets relative to this file, so the game can be started from
+# any working directory.
+ASSETS_DIR = Path(__file__).resolve().parent / "assets"
+FONT_PATH = ASSETS_DIR / "font" / "GetVoIP-Grotesque.ttf"
+
+BIG_FONT = pygame.font.Font(FONT_PATH, int(WIDTH / 8))
+SMALL_FONT = pygame.font.Font(FONT_PATH, int(WIDTH / 20))
 
 pygame.display.set_caption(WINDOW_TITLE)
 
